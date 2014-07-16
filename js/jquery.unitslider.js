@@ -202,7 +202,7 @@
                 if (_this.drag)
                 {
                     e.data = this;
-                    _this.slide(e, _this, max, min, snap, baseNum, sliderLen, sliderbarR, snapBreak);
+                    _this.slide(e, _this);
                 }
             };
 
@@ -280,7 +280,7 @@
                     e = (e.originalEvent.touches) ? e.originalEvent.touches[0] : e;
 
                     e.data = this;
-                    _this.slide(e, _this, max, min, snap, baseNum, sliderLen, sliderbarR, snapBreak);
+                    _this.slide(e, _this);
                 }
             };
 
@@ -438,8 +438,18 @@
                 );
             }
         },
-        slide: function(e, self, max, min, snap, baseNum, sliderLen, sliderbarR, snapBreak)
+        slide: function(e, self)
         {
+            var max = this.options.max,
+                min = this.options.min,
+                snap = this.options.snap,
+
+                baseNum = this.baseNum,
+                sliderLen = this.sliderLen,
+                sliderbarR = this.sliderbarR,
+                snapBreak = this.snapBreak
+                ;
+
             var relate, a;
             if (this.VorH == "horizontal")
             {
@@ -661,7 +671,7 @@
             this.el.removeAttr("style").removeAttr("class").empty().removeData('unitslider');
             delete this.el[0].el;
         },
-        resize: function(w, h)
+        resize: function()
         {
             var VorH = this.VorH,
                 _this = this;
