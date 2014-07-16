@@ -211,7 +211,7 @@
                 _this.drag = false;
                 $(this).off(".slider");
 
-                _this.sliderVal("change", sliderLen, baseNum, max, min, snap);
+                _this.sliderVal("change");
             };
 
             $.each
@@ -289,7 +289,7 @@
                 _this.drag = false;
                 $(window).off(".slider");
 
-                _this.sliderVal("change", sliderLen, baseNum, max, min, snap);
+                _this.sliderVal("change");
             };
 
             $.each(
@@ -509,7 +509,7 @@
                         b("startP", 0, sliderLen);
                     }
 
-                    self.sliderVal("slider", sliderLen, baseNum, max, min, snap);
+                    self.sliderVal("slider");
                 };
             }
             else if (this.VorH == "vertical")
@@ -570,7 +570,7 @@
                         b("startP", 0, sliderLen);
                     }
 
-                    self.sliderVal("slider", sliderLen, baseNum, max, min, snap);
+                    self.sliderVal("slider");
                 };
             }
             if(snapBreak !== 0)
@@ -607,8 +607,15 @@
                 }
             );
         },
-        sliderVal: function(type, sliderLen, baseNum, max, min, snap)
+        sliderVal: function(type)
         {
+            var sliderLen = this.sliderLen,
+                baseNum = this.baseNum,
+
+                max = this.options.max,
+                min = this.options.min,
+                snap = this.options.snap;
+
             // params "slider" or "change"
             if (this.options[type] == undefined)
             {
