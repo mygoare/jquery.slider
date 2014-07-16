@@ -661,9 +661,20 @@
             this.el.removeAttr("style").removeAttr("class").empty().removeData('unitslider');
             delete this.el[0].el;
         },
-        resize: function()
+        resize: function(w, h)
         {
+            var VorH = this.VorH,
+                _this = this;
 
+            if (VorH == 'horizontal')
+            {
+                _this.sliderLen = parseInt(_this.unitSlider.css('width'));
+            }
+            else if (VorH == 'vertical')
+            {
+                _this.sliderLen = parseInt(_this.unitSlider.css('height'));
+            }
+            _this.updateSlider(_this.current);
         }
     };
     $.fn.unitslider = function(props, settings)

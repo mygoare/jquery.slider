@@ -23,7 +23,7 @@
     #a
     {
         margin-left: 200px;
-        /*width: 400px;*/
+        width: 50%;
         /*height: 10px;*/
     }
     #b
@@ -41,39 +41,40 @@
 <body>
 <br/>
 <br/>
-  <div id="a"></div>
-  <div id="b"></div>
+    <div id="a"></div>
 
-<div id="c">
-    <div class="volume-control">
-        <div id="volume-icon" class=""></div>
-        <div class="volume-trend-bg">
-            <div></div>
+    <div id="b"></div>
+
+    <div id="c">
+        <div class="volume-control">
+            <div id="volume-icon" class=""></div>
+            <div class="volume-trend-bg">
+                <div></div>
+            </div>
+            <div class="volume-slider"></div>
         </div>
-        <div class="volume-slider"></div>
     </div>
-</div>
 
 
-<div id="d">
-    <div class="volume-control">
-        <div id="volume-icon" class=""></div>
-        <div class="volume-trend-bg">
-            <div></div>
+    <div id="d">
+        <div class="volume-control">
+            <div id="volume-icon" class=""></div>
+            <div class="volume-trend-bg">
+                <div></div>
+            </div>
+            <div class="volume-slider"></div>
         </div>
-        <div class="volume-slider"></div>
     </div>
-</div>
 
-  <script>
+<script>
     $("#a").unitslider({
         min: 0,
         max: 300,
         current: [0, 90],
-//        current: 90,
-//        snap: 30,
-//        padding: 2,
-//        withProcessColor: false,
+    //        current: 90,
+    //        snap: 30,
+    //        padding: 2,
+    //        withProcessColor: false,
         withSliderbar: false,
         slider: function(p, v)
         {
@@ -84,12 +85,13 @@
             console.warn(p, v);
         },
     theme: "round1_pink",
-//        orientation: "vertical"
+    //        orientation: "vertical"
     }).append("<h1></h1>");
+
     $("#b").unitslider({
         min: 0,
         max: 200,
-//        current: [0,100],
+    //        current: [0,100],
         current: 100,
         snap: 20,
         orientation: "vertical",
@@ -126,33 +128,33 @@
         }
     };
     $("#c div.volume-slider").unitslider(
+        {
+            withProcessColor: false,
+            theme: 'volume-style1',
+            current: 20,
+            init: function(p, v)
             {
-                withProcessColor: false,
-                theme: 'volume-style1',
-                current: 20,
-                init: function(p, v)
-                {
-                    volumeSlider(p);
-                    console.error(p, v);
-                },
-                slider: function(p)
-                {
-                    volumeSlider(p);
-                }
+                volumeSlider(p);
+                console.error(p, v);
+            },
+            slider: function(p)
+            {
+                volumeSlider(p);
             }
+        }
     );
 
 
-      // #d
-      $('#d div.volume-slider').unitslider(
-              {
-                  theme: 'volume-style2',
-                  current: 0,
-                  withSliderbar: false,
-                  snap: 10,
-//                orientation: 'vertical'
-              }
-      );
-  </script>
+    // #d
+    $('#d div.volume-slider').unitslider(
+          {
+              theme: 'volume-style2',
+              current: 0,
+              withSliderbar: false,
+              snap: 10,
+    //                orientation: 'vertical'
+          }
+    );
+</script>
 </body>
 </html>
