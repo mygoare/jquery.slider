@@ -35,7 +35,7 @@
         this.drag = false;
         this.sliderLen = 0;
         this.sliderbarR = 0;
-        this.snapBreak = 0;
+        this.snapBreakLen = 0;
 
         // start position
         this.startP = null;
@@ -146,7 +146,7 @@
                 drag = this.drag,
                 sliderLen,
                 sliderbarR,
-                snapBreak;
+                snapBreakLen;
 
             // sliderLen will be used by updateSlider method
             if (VorH == "vertical")
@@ -174,7 +174,7 @@
 
             if (this.options.snap !== 1 && this.options.snap !== 0)
             {
-                snapBreak = this.snapBreak = sliderLen / ( baseNum / this.options.snap ); // no Math.round() here
+                snapBreakLen = this.snapBreakLen = sliderLen / ( baseNum / this.options.snap ); // no Math.round() here
             }
 
             if (this.options.handle)
@@ -201,7 +201,7 @@
                 baseNum = this.baseNum,
                 sliderLen = this.sliderLen,
                 sliderbarR = this.sliderbarR,
-                snapBreak = this.snapBreak
+                snapBreakLen = this.snapBreakLen
                 ;
 
             // slider event listening start
@@ -280,7 +280,7 @@
                 baseNum = this.baseNum,
                 sliderLen = this.sliderLen,
                 sliderbarR = this.sliderbarR,
-                snapBreak = this.snapBreak
+                snapBreakLen = this.snapBreakLen
                 ;
 
             // slider event listening start
@@ -459,7 +459,7 @@
                 baseNum = this.baseNum,
                 sliderLen = this.sliderLen,
                 sliderbarR = this.sliderbarR,
-                snapBreak = this.snapBreak
+                snapBreakLen = this.snapBreakLen
                 ;
 
             var relate, a;
@@ -496,7 +496,7 @@
                         // two side border
 
                         // debug
-                        // console.error("left="+left, "sliderLen="+sliderLen, "snapBreak="+snapBreak, "e.data.startP="+e.data.startP, "relate="+relate);
+                        // console.error("left="+left, "sliderLen="+sliderLen, "snapBreakLen="+snapBreakLen, "e.data.startP="+e.data.startP, "relate="+relate);
                         self.p = Math.round(e.data.startP / sliderLen * 100);
                     };
 
@@ -557,7 +557,7 @@
                         // two side border
 
                         // debug
-                        // console.error("bottomVal="+bottomVal, "sliderLen="+sliderLen, "snapBreak="+snapBreak, "e.data.startP="+e.data.startP, "relate="+relate);
+                        // console.error("bottomVal="+bottomVal, "sliderLen="+sliderLen, "snapBreakLen="+snapBreakLen, "e.data.startP="+e.data.startP, "relate="+relate);
                         self.p = Math.round( (1 - e.data.startP / sliderLen) * 100);
                     };
 
@@ -585,11 +585,11 @@
                     self.sliderVal("slider");
                 };
             }
-            if(snapBreak !== 0)
+            if(snapBreakLenLen !== 0)
             {
-                if (Math.abs(relate) >= snapBreak)
+                if (Math.abs(relate) >= snapBreakLen)
                 {
-                    relate = ( relate < 0 ) ? - snapBreak : snapBreak;
+                    relate = ( relate < 0 ) ? - snapBreakLen : snapBreakLen;
                     a();
                 }
             }
