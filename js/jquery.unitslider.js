@@ -585,7 +585,7 @@
                     self.sliderVal("slider");
                 };
             }
-            if(snapBreakLenLen !== 0)
+            if(snapBreakLen !== 0)
             {
                 if (Math.abs(relate) >= snapBreakLen)
                 {
