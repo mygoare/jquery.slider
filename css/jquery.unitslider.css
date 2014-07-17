@@ -52,8 +52,14 @@
   top: 0;
   left: 0;
 }
+.unit-slider-element .unit-reduce-btn {
+  left: 0;
+}
 .unit-slider-element .unit-reduce-btn:after {
   content: "-";
+}
+.unit-slider-element .unit-increase-btn {
+  right: 0;
 }
 .unit-slider-element .unit-increase-btn:after {
   content: "+";

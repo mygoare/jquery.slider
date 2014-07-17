@@ -70,12 +70,13 @@
     $("#a").unitslider({
         min: 0,
         max: 300,
-        current: [0, 90],
-    //        current: 90,
+//        current: [0, 90],
+            current: 90,
     //        snap: 30,
     //        padding: 2,
-    //        withProcessColor: false,
+//            withProcessColor: false,
         withSliderbar: false,
+        readOnly: true,
         slider: function(p, v)
         {
             console.log(p, v);
@@ -84,8 +85,8 @@
         {
             console.warn(p, v);
         },
-    theme: "round1_pink",
-    //        orientation: "vertical"
+//    theme: "round1_pink",
+//            orientation: "vertical"
     }).append("<h1></h1>");
 
     $("#b").unitslider({

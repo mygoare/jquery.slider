@@ -71,39 +71,6 @@
             this.unitSlider = $('<div class="unit-slider"></div>');
             this.sliderbar = $('<div class="unit-slider-bar"><div class="unit-slider-bar-m"></div></div>');
 
-            // should have only one sliderbar
-            if (!this.options.withSliderbar && this.barNum === undefined)
-            {
-                this.sliderbar.hide();
-                this.reduceBtn = $('<div class="unit-reduce-btn"></div>');
-                this.increaseBtn = $('<div class="unit-increase-btn"></div>');
-
-                var snap = this.options.snap,
-                    self = this,
-                    min = this.options.min,
-                    max = this.options.max;
-
-                // todo: need fix here
-                this.reduceBtn.on('click', function()
-                {
-                    var pre = self.current - snap;
-                    self.isValid(pre, function()
-                    {
-                        self.updateSlider(pre);
-                        self.current = pre;
-                    });
-                });
-                this.increaseBtn.on('click', function()
-                {
-                    var pre = self.current + snap;
-                    self.isValid(pre, function()
-                    {
-                        self.updateSlider(pre);
-                        self.current = pre;
-                    });
-                });
-            }
-
             this.sliderbarArr.push(this.sliderbar);
             if (Array.isArray(this.options.current))
             {
@@ -121,6 +88,49 @@
             // append unitslider html
             this.unitSlider.append(this.sliderbar, this.sliderbarClone, this.sliderProcessColor, this.reduceBtn, this.increaseBtn);
             el.append(this.unitSlider);
+
+            // no sliderbar
+            // should have only one sliderbar
+            if (!this.options.withSliderbar && this.barNum === undefined)
+            {
+                this.sliderbar.hide();
+                this.reduceBtn = $('<div class="unit-reduce-btn"></div>');
+                this.increaseBtn = $('<div class="unit-increase-btn"></div>');
+
+                var snap = this.options.snap,
+                    self = this,
+                    min = this.options.min,
+                    max = this.options.max;
+
+                var clickDo = function(v)
+                {
+                    var value = v;
+                    return function () {
+                        self.updateSlider(value);
+                        self.current = value;
+                    }
+                };
+                this.reduceBtn.on('click', function(e)
+                {
+                    e.preventDefault();
+                    var pre = self.current - snap;
+                    self.isValid(pre, clickDo(pre));
+                });
+                this.increaseBtn.on('click', function(e)
+                {
+                    e.preventDefault();
+                    var pre = self.current + snap;
+                    self.isValid(pre, clickDo(pre));
+                });
+            }
+
+            // readOnly
+            if (this.options.readOnly)
+            {
+                this.sliderbar.hide();
+                if (this.reduceBtn) this.reduceBtn.hide();
+                if (this.increaseBtn) this.increaseBtn.hide();
+            }
 
             this.init(el);
 
@@ -724,6 +734,7 @@
         theme           : "default",
         withProcessColor: true,
         withSliderbar   : true,
+        readOnly        : false,
         slider          : function (p, v) {
         },
         change          : function (p, v) {
