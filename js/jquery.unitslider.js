@@ -85,10 +85,6 @@
                 this.sliderProcessColor.css('background-color', 'transparent');
             }
 
-            // append unitslider html
-            this.unitSlider.append(this.sliderbar, this.sliderbarClone, this.sliderProcessColor, this.reduceBtn, this.increaseBtn);
-            el.append(this.unitSlider);
-
             // no sliderbar
             // should have only one sliderbar
             if (!this.options.withSliderbar && this.barNum === undefined)
@@ -131,6 +127,10 @@
                 if (this.reduceBtn) this.reduceBtn.hide();
                 if (this.increaseBtn) this.increaseBtn.hide();
             }
+
+            // append unitslider html
+            this.unitSlider.append(this.sliderbar, this.sliderbarClone, this.sliderProcessColor, this.reduceBtn, this.increaseBtn);
+            el.append(this.unitSlider);
 
             this.init(el);
 
