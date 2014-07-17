@@ -400,6 +400,7 @@
                 a(v, 0);
                 this.startP = this.startP0;
             }
+            this.current = v;
         },
         sliderbarRelativeXY: function()
         {
