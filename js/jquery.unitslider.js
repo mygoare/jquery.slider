@@ -140,7 +140,7 @@
         init: function(el)
         {
             var _this = this,
-                padding = this.options.padding,
+                padding = parseInt(this.options.padding),
                 VorH = this.VorH,
                 baseNum = this.baseNum,
                 drag = this.drag,
