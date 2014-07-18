@@ -652,7 +652,9 @@
                 {
                     a = Math.round( (- (startP / sliderLen * baseNum) + max) / snap) * snap;
                 }
-                return a;
+
+                // 精度处理
+                return _this.retrieveDecimal(a);
             }
             if (this.barNum == 2)
             {
@@ -671,6 +673,12 @@
 
                 this.options[type](p, v);
             }
+        },
+        retrieveDecimal: function (num) {
+            var snap = this.options.snap;
+            var precision = (parseFloat(snap).toString().split('.')[1] || []).length;
+
+            return Math.floor( num * Math.pow(10, precision) ) / Math.pow(10, precision);
         },
         isValid: function(v, callback)
         {
