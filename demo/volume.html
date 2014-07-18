@@ -72,11 +72,11 @@
         max: 300,
 //        current: [0, 90],
             current: 90,
-    //        snap: 30,
+            snap: 0.4,
     //        padding: 2,
 //            withProcessColor: false,
-        withSliderbar: false,
-        readOnly: true,
+//        withSliderbar: false,
+//        readOnly: true,
         slider: function(p, v)
         {
             console.log(p, v);
@@ -85,7 +85,8 @@
         {
             console.warn(p, v);
         },
-//    theme: "round1_pink",
+    theme: "normal_pink",
+        padding: 2
 //            orientation: "vertical"
     }).append("<h1></h1>");
 
