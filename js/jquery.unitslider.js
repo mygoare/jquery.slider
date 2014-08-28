@@ -52,6 +52,10 @@
 
         // record current value (number or array)
         this.current = this.options.current;
+
+        // rateLimit
+        this.rateLimitFlag = true;
+        this.timer = null;
     }
 
     Unitslider.prototype =
@@ -291,6 +295,7 @@
                     e = (e.originalEvent.touches) ? e.originalEvent.touches[0] : e;
 
                     e.data = this;
+
                     _this.slide(e, _this);
                 }
             };
@@ -334,9 +339,6 @@
                         /////
 
                         // start from here.
-//                            $(window).mousemove(
-//                                $.proxy(sliderBarMove, objPara)
-//                            ).mouseup(windowUnbind);
                         $(window).on(
                             {
                                 "mousemove.slider touchmove.slider": $.proxy(sliderBarMove, objPara),
@@ -522,7 +524,7 @@
                         b("startP", 0, sliderLen);
                     }
 
-                    self.sliderVal("slider");
+                    self.sliderVal("slide");
                 };
             }
             else if (this.VorH == "vertical")
@@ -583,7 +585,7 @@
                         b("startP", 0, sliderLen);
                     }
 
-                    self.sliderVal("slider");
+                    self.sliderVal("slide");
                 };
             }
             if(snapBreakLen !== 0)
@@ -629,7 +631,7 @@
                 min = this.options.min,
                 snap = this.options.snap;
 
-            // params "slider" or "change"
+            // params "slide" or "change"
             if (this.options[type] == undefined)
             {
                 return false;
@@ -639,7 +641,8 @@
                 p = this.p,
                 p0 = this.p0,
                 p1 = this.p1,
-                v, v0, v1;
+                v, v0, v1,
+                fun;
 
             function calVal(startP)
             {
@@ -663,7 +666,7 @@
 
                 this.current = [v0, v1];
 
-                this.options[type]([p0, p1], [v0, v1]);
+                fun = function(){_this.options[type]([p0, p1], [v0, v1])};
             }
             else
             {
@@ -671,7 +674,16 @@
 
                 this.current = v;
 
-                this.options[type](p, v);
+                fun = function(){_this.options[type](p, v)};
+            }
+
+            if (type == 'slide')
+            {
+                _this.rate(fun);
+            }
+            else
+            {
+                fun();
             }
         },
         retrieveDecimal: function (num) {
@@ -713,6 +725,25 @@
                 _this.sliderLen = parseInt(_this.unitSlider.css('height'));
             }
             _this.updateSlider(_this.current);
+        },
+        rate: function(cb)
+        {
+            var _this = this,
+                rateLimitValue = _this.options.rateLimit;
+
+            if (!_this.timer)
+            {
+                _this.timer = setTimeout(function(){
+                    _this.rateLimitFlag = true;
+                    _this.timer = null;
+                }, rateLimitValue);
+            }
+
+            if (_this.rateLimitFlag)
+            {
+                _this.rateLimitFlag = false;
+                cb();
+            }
         }
     };
     $.fn.unitslider = function(props, settings)
@@ -746,7 +777,8 @@
         withProcessColor: true,
         withSliderbar   : true,
         readOnly        : false,
-        slider          : function (p, v) {
+        rateLimit       : 1000,
+        slide           : function (p, v) {
         },
         change          : function (p, v) {
         },
