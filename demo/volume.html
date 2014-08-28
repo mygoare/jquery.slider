@@ -70,8 +70,8 @@
     $("#a").unitslider({
         min: 0,
         max: 300,
-//        current: [0, 90],
-            current: 90,
+        current: [0, 90],
+//            current: 90,
             snap: 0.4,
     //        padding: 2,
 //            withProcessColor: false,
@@ -97,7 +97,7 @@
         current: 100,
         snap: 20,
         orientation: "vertical",
-        slider: function(p, v)
+        slide: function(p, v)
         {
             console.log(p, v);
         },
@@ -134,12 +134,13 @@
             withProcessColor: false,
             theme: 'volume-style1',
             current: 20,
+            rateLimit: 0,
             init: function(p, v)
             {
                 volumeSlider(p);
                 console.error(p, v);
             },
-            slider: function(p)
+            slide: function(p)
             {
                 volumeSlider(p);
             }
