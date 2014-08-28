@@ -777,7 +777,7 @@
         withProcessColor: true,
         withSliderbar   : true,
         readOnly        : false,
-        rateLimit       : 1000,
+        rateLimit       : 400,
         slide           : function (p, v) {
         },
         change          : function (p, v) {
