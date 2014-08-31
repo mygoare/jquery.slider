@@ -1,6 +1,6 @@
 ### Slider
 
-Slider is a JQuery plugin which makes nearly the same effect of JQuery UI's slider, but you don't need to import the big & fat JQuery UI library all in your project here. And also Slider here provide more features than JQuery UI's slider.
+Slider is a JQuery plugin which makes nearly the same effect of JQuery UI's slider, but you don't need to import the big & fat JQuery UI library all in your project, and Slider also provides more features than JQuery UI's slider.
 
 ### How to use
 
