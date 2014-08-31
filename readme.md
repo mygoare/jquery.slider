@@ -4,7 +4,7 @@ Slider is a JQuery plugin which makes nearly the same effect of JQuery UI's slid
 
 ### How to use
 
-	$("#ele").unitslider(
+	$("#el").unitslider(
 		{
         	min             : 0,
         	max             : 100,
@@ -29,20 +29,20 @@ Slider is a JQuery plugin which makes nearly the same effect of JQuery UI's slid
 
 ### Features
 
-*	horizontal & vertical orientation
+*	Horizontal & vertical orientation
 *	Several default themes & you can create your own easily
 *	Move the slider bar by custom snap
-*	readOnly
-*	when sliding, trigger slide & change event which both return current percent & value
-*	min & max value
-*	set initial value
-*	two slider bars support
-*	touch support
+*	Be readOnly status
+*	Trigger slide & change event which both return current percent & value when sliding
+*	Min & max value
+*	Set initial value
+*	Two slider bars support
+*	Touch support
 
 ### To do list
 
 *	Zepto support
-*	CMD support
+*	AMD support
 
 ### License
 
