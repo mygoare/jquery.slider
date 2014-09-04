@@ -366,24 +366,31 @@
 
             a = function(v, i)
             {
-                _this.isValid(v, function()
+                if (sliderLen !== 0)
                 {
-                    var left = (v - min) * sliderLen / baseNum;
-                    if (VorH == "horizontal")
+                    _this.isValid(v, function()
                     {
-                        _this["startP"+i] = left;
+                        var left = (v - min) * sliderLen / baseNum;
+                        if (VorH == "horizontal")
+                        {
+                            _this["startP"+i] = left;
 
-                        _this.sliderbarArr[i].css("left", left - sliderbarR);
-                        _this.updateProcess("left", "width", left / sliderLen * 100, i);
-                    }
-                    else if (VorH == "vertical")
-                    {
-                        _this["startP"+i] = sliderLen - left;
+                            _this.sliderbarArr[i].css("left", left - sliderbarR);
+                            _this.updateProcess("left", "width", left / sliderLen * 100, i);
+                        }
+                        else if (VorH == "vertical")
+                        {
+                            _this["startP"+i] = sliderLen - left;
 
-                        _this.sliderbarArr[i].css("bottom", left - sliderbarR);
-                        _this.updateProcess("bottom", "height", left / sliderLen * 100, i);
-                    }
-                });
+                            _this.sliderbarArr[i].css("bottom", left - sliderbarR);
+                            _this.updateProcess("bottom", "height", left / sliderLen * 100, i);
+                        }
+                    });
+                }
+                else
+                {
+                    throw 'unitslider plugin: sliderLen CAN\'T be 0';
+                }
             };
 
             if (Array.isArray(v))
