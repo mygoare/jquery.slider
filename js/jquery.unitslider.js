@@ -144,7 +144,7 @@
         init: function(el)
         {
             var _this = this,
-                padding = parseInt(this.options.padding),
+                edgeOffset = parseInt(this.options.edgeOffset),
                 VorH = this.VorH,
                 baseNum = this.baseNum,
                 drag = this.drag,
@@ -158,8 +158,8 @@
                 sliderbarR = this.sliderbarR = parseInt(this.sliderbar.css("height")) / 2;
                 el.css(
                     {
-                        "padding-top"   : (sliderbarR + padding) + "px",
-                        "padding-bottom": (sliderbarR + padding) + "px"
+                        "padding-top"   : (sliderbarR + edgeOffset) + "px",
+                        "padding-bottom": (sliderbarR + edgeOffset) + "px"
                     }
                 );
                 sliderLen = this.sliderLen = parseInt(this.unitSlider.css("height"));
@@ -169,8 +169,8 @@
                 sliderbarR = this.sliderbarR = parseInt(this.sliderbar.css("width")) / 2;
                 el.css(
                     {
-                        "padding-left" : (sliderbarR + padding) + "px",
-                        "padding-right": (sliderbarR + padding) + "px"
+                        "padding-left" : (sliderbarR + edgeOffset) + "px",
+                        "padding-right": (sliderbarR + edgeOffset) + "px"
                     }
                 );
                 sliderLen = this.sliderLen = parseInt(this.unitSlider.css("width"));
@@ -779,7 +779,7 @@
         orientation     : "horizontal",
         handle          : true,
         snap            : 1,
-        padding         : 5,
+        edgeOffset      : 5,
         theme           : "default",
         withProcessColor: true,
         withSliderbar   : true,
