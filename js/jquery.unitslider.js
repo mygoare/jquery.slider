@@ -779,7 +779,7 @@
         orientation     : "horizontal",
         handle          : true,
         snap            : 1,
-        edgeOffset      : 5,
+        edgeOffset      : 0,
         theme           : "default",
         withProcessColor: true,
         withSliderbar   : true,
