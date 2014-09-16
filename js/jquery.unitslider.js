@@ -49,12 +49,12 @@
         this.p = null;
         this.p0 = null;
         this.p1 = null;
+        this.percent = null;
 
         // record current value (number or array)
         this.current = this.options.current;
 
         // rateLimit
-        this.rateLimitFlag = true;
         this.timer = null;
     }
 
@@ -653,36 +653,38 @@
 
             function calVal(startP)
             {
-                var a;
+                var outputValue;
                 if (_this.VorH == "horizontal")
                 {
-                    a = Math.round( (startP / sliderLen * baseNum + min) / snap ) * snap;
+                    outputValue = Math.round( (startP / sliderLen * baseNum + min) / snap ) * snap;
                 }
                 else if (_this.VorH == "vertical")
                 {
-                    a = Math.round( (- (startP / sliderLen * baseNum) + max) / snap) * snap;
+                    outputValue = Math.round( (- (startP / sliderLen * baseNum) + max) / snap) * snap;
                 }
 
-                // 精度处理
-                return _this.retrieveDecimal(a);
+                // deal with precision (because of javascript's float precision problem)
+                return _this.retrieveDecimal(outputValue);
             }
             if (this.barNum == 2)
             {
                 v0 = calVal(this.startP0);
                 v1 = calVal(this.startP1);
 
+                this.percent = [p0, p1];
                 this.current = [v0, v1];
-
-                fun = function(){_this.options[type]([p0, p1], [v0, v1])};
             }
             else
             {
                 v = calVal(this.startP);
 
+                this.percent = p;
                 this.current = v;
-
-                fun = function(){_this.options[type](p, v)};
             }
+            fun = function()
+            {
+                _this.options[type](_this.percent, _this.current)
+            };
 
             if (type == 'slide')
             {
@@ -740,16 +742,11 @@
 
             if (!_this.timer)
             {
-                _this.timer = setTimeout(function(){
-                    _this.rateLimitFlag = true;
+                _this.timer = setTimeout(function()
+                {
+                    cb();
                     _this.timer = null;
                 }, rateLimitValue);
-            }
-
-            if (_this.rateLimitFlag)
-            {
-                _this.rateLimitFlag = false;
-                cb();
             }
         }
     };
